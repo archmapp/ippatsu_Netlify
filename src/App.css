@@ -1,0 +1,339 @@
+/* https://web-designer.cman.jp/css_ref/abc_list/backface-visibility/ */
+
+body {
+  /* background-color: #C8D0D2; */
+  background: rgba(255, 248, 222, 0.1);
+  margin: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: .5rem 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #fed;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fed;
+  padding: 0px 10px;
+  border-radius: 6px 6px 0 0;
+}
+
+
+.title h3 {
+  color: green;
+  font-family: 'メイリオ',
+    'Meiryo',
+    sans-serif;
+}
+
+.title h4 {
+  color: rgb(120, 175, 37);
+}
+
+.title span {
+  color: #aaa;
+  font-weight: bold;
+}
+
+footer .title {
+  color: #555;
+  font-weight: bold;
+}
+
+footer .title span {
+  color: #999;
+  font-weight: bold;
+}
+
+.title span span {
+  color: rgb(0, 170, 255);
+  font-weight: bold;
+}
+
+.title li {
+  /* font-size: x-small; */
+  font-weight: 500;
+}
+
+.title ul,
+.quickview-body ul {
+  font-size: small;
+  list-style: disc;
+}
+
+
+.form-group {
+  /* display: flex;
+  flex-direction: column; */
+  margin: .5rem;
+}
+
+.form-group>label {
+  color: #777;
+  font-size: .75rem;
+  margin-right: .5rem;
+}
+
+.btn {
+  background-color: rgb(0, 170, 255);
+  color: white;
+  padding: .5em 1em;
+  border-radius: .3em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(0, 136, 204);
+}
+
+.card {
+  /* height: 120px; */
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: .25rem;
+  /* 
+    transform-style 「要素重なり時の３D表示」
+    「transform-style」は「transform」で変形した要素の
+    重なり方を指定することができます。
+    重なり方は「2D」「3D」より選択することができます。
+  */
+  transform-style: preserve-3d;
+  transition: 150ms;
+  cursor: pointer;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) scale(var(--scale, 1));
+  /* transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0)); */
+}
+
+.card img {
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+  border-radius: 5px;
+}
+
+.card:hover {
+  /* --translate-y: -2px; */
+  --scale: 1.1;
+  /* box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5); */
+}
+
+.card.flip {
+  --rotate-y: 180deg;
+}
+
+.card .front {
+  left: 0;
+}
+
+/* 
+    backface-visibility「裏面の表示」 要素の裏面の表示／非表示(要素の透明)を指定します。 要素を３Ｄで回転した場合、要素の裏面が見える状態の時の表示／非表示や、 立方体の内側の表示／非表示を指定する時に使用します。
+    https: //web-designer.cman.jp/css_ref/abc_list/backface-visibility/
+  */
+.card .front,
+.card .back {
+  /* 重ねる */
+  position: absolute;
+  padding: 1rem;
+  backface-visibility: hidden;
+}
+
+.card .back {
+  height: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  padding: 0;
+  border-radius: 5px;
+  transform: rotateY(180deg);
+  background-color: rgba(250, 174, 61, 0.945);
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.card-grid {
+  margin: 0px auto;
+  display: grid;
+  /* padding-top: 7px; */
+  background-color: rgb(248, 207, 214);
+
+  align-items: center;
+  /* grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* grid-template-rows: min-content(250px) min-content(250px) 120px; */
+  /* grid-template-rows: 200px 200px ; */
+  grid-template-rows: minmax(200px, 200px) minmax(200px, 200px);
+  grid-auto-rows: 200px;
+  gap: .7rem;
+
+}
+
+@media screen and (max-width: 705px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-rows: minmax(140px, 140px) minmax(140px, 140px);
+    grid-auto-rows: 140px;
+    gap: .6rem;
+  }
+
+  .card {
+    max-height: 140px;
+  }
+
+  .card .back {
+    height: 140px;
+    max-width: 140px;
+    min-width: 140px;
+    /* width: 140px; */
+    font-size: small;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-template-rows: minmax(120px, 120px) minmax(120px, 120px);
+    grid-auto-rows: 120px;
+    gap: .5rem;
+  }
+
+  .card {
+    max-height: 120px;
+  }
+
+  .card .back {
+    height: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    font-size: small;
+  }
+
+  /* 
+  .id100 {
+    max-height: 80px;
+
+  } */
+
+  #order {
+    order: 10;
+  }
+
+  #orderB {
+    order: 20;
+  }
+
+  .title {
+    /* display: flex; */
+    flex-direction: column;
+  }
+
+  .title ul {
+    font-size: x-small;
+    margin-top: 5px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  #orderB, .quickview-body .message-body {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-rows: minmax(80px, 80px) minmax(80px, 80px) minmax(80px, 80px);
+    grid-auto-rows: 80px;
+  }
+
+  .card {
+    height:
+      80px;
+  }
+
+  .card .back {
+    height: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    font-size: smaller;
+  }
+
+  .id100 {
+    max-height: 70px;
+  }
+}
+
+img.cover {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+img.id100.cover {
+  display: block;
+  height: 95%;
+  object-fit: cover;
+  width: 95%;
+}
+
+
+.id100 {
+  max-height: 80px;
+
+  animation-name: mix-scale;
+  animation-duration: 3s;
+  animation-iteration-count: 3;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  /* transform-origin: center center; */
+  /* animation-timing-function: linear; */
+}
+
+#orderB {
+  background-color: #666;
+}
+
+@keyframes mix-scale {
+  0% {
+    top: 42%;
+    left: 42%;
+    margin-right: -50%;
+    transform: translate(-150%, -50%);
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+
+  100% {
+    top: 42%;
+    left: 42%;
+    margin-right: -50%;
+    transform: scale(1, 1);
+  }
+}
+
+
+/* .quickview-footer > div { */
+.foot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* align-content: normal; */
+}
